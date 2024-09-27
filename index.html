@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="EZIGen: Enhancing zero-shot subject-driven image generation with precise subject encoding and decoupled guidance.    ">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EZIGen Demo</title>
+ 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/cool.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+  
+  
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body" style="padding-top: 12px; padding-bottom: 24px;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h2 class="title is-3 publication-title" style="margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 0">EZIGen: Enhancing zero-shot subject-driven image generation </h2>
+          <h2 class="title is-3 publication-title" style="margin-top: 0">with precise subject encoding and decoupled guidance</h2>
+
+
+  </div>
+</section>
+
+<section class="hero teaser">
+  <!-- <h2 class="title is-3" style="text-align: center;">Result Demonstration</h2> -->
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div style="text-align: center;">
+        <img src="static/images/first4.jpg"
+                 class="teaser" width="90%"/>
+      </div>
+      
+    </div>
+    <h2 class="subtitle has-text-centered">
+      <span class="method-name">TL;DR: EZIGen enhances zero-shot subject driven generation by integrating a carefully designed Reference UNet extractor and decoupled guidances, preserving subject identity while maintaining flexibilities.
+    </h2>
+  </div>
+</section>
+
+
+<br>
+<br>
+<br>
+
+
+<section class="hero teaser">
+  <div class="container">
+    <div class="scaled-container" style="overflow: hidden;">
+      <div class="scale-up">
+        <div class="hero-body is-flex is-justify-content-space-around">
+          <video id="teaser3" autoplay controls muted loop playsinline width="33%">
+            <source src="static/videos/generation.mp4" type="video/mp4">
+          </video>
+          <video id="teaser2" autoplay controls muted loop playsinline width="33%">
+            <source src="static/videos/editing.mp4" type="video/mp4">
+          </video>
+          <video id="teaser1" autoplay controls muted loop playsinline width="33%">
+            <source src="static/videos/interpolation.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<br>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          Zero-shot subject-driven image generation aims to produce images that incorporate a subject from a given example image. The challenge lies in preserving the subject's identity while aligning with the text prompt that often requires modifying certain aspects of the subject's appearance. Despite advancements in diffusion model based methods, existing approaches still struggle to balance identity preservation with text prompt alignment. In this study, we conducted an in-depth investigation into this issue and uncovered key insights for achieving effective identity preservation while maintaining a strong balance. Our key findings include: (1) the design of the subject image encoder significantly impacts identity preservation quality, and (2) separating text and subject guidance is crucial for both text alignment and identity preservation. Building on these insights, we introduce a new approach called EZIGen, which employs two main strategies: a carefully crafted subject image Encoder based on the pretrained UNet of the Stable Diffusion model to ensure high-quality identity transfer, following a process that decouples the guidance stages and iteratively refines the initial image layout. Through these strategies, EZIGen achieves state-of-the-art results on multiple subject-driven benchmarks with a unified model and 100 times less training data. 
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0px; padding-bottom: 0px;">
+  <div class="container is-max-desktop">
+    <div class="column is-centered " style="padding-left: 0px; padding-right: 0px;">
+      <div class="column is-full-width" style="padding-left: 0px; padding-right: 0px;">
+      <div class="content has-text-justified">
+        <div style="text-align: center;">
+          <h2 class="title is-3">Method</h2>
+        </div>
+        <div style="text-align: center;">
+          <img src="static/images/main3.png"
+          class="body"
+          alt="Interpolate start reference image. " width="100%"/>
+        </div>
+        <p>Illustration of the proposed system. Starting from Encoding and Injecting subject feature, where we extract a set of intermediate latent features during the simulated late denoising process of the given noisy subject image using our fixed Reference UNet, we then regard these features as offline Subject Guidance and inject it to the Main UNet via a learnable adapter. Then we showcase how we decouple the generation process into the Layout Generation Process and Appearance Transfer Process. We first leverage the text prompt as Text Guidance using the original text-guided diffusion process to obtain a layout latent at a middle timestep <i>t</i>, then we incorporate the offline Subject Guidance to transfer the subject appearance into the layout latent in the rest of the timesteps. Finally, to achieve a complete transfer, we develop the Iterative Appearance Transfer mechanism to repeat the Appearance Transfer Process by adding noise to the generated image, which continues to repeat for <i>N</i> times until satisfaction.</p>
+      </div>
+      </div>
+      </div>
+      </div>
+
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+  <div class="column is-centered " style="padding-left: 0px; padding-right: 0px;">
+    <div class="column is-full-width" style="padding-left: 0px; padding-right: 0px;">
+    <div class="content has-text-justified">
+      <div style="text-align: center;">
+        <h2 class="title is-3">Comparisons</h2>
+      </div>
+      
+      <p>We conduct in-depth comparisons of our method against previous literatures on various tasks: namely subject-driven image generation, subject-driven image editing and human content generation task.</p>
+    </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <div class="column">
+        <div class="content">
+          <h3 class="title is-4">Results on DreamBench dataset </h3>
+          <div style="text-align: center;">
+            <img src="static/images/qualitative_comparison.jpg"
+            class="body"
+            alt="Interpolate start reference image. " width="100%"/>
+          </div>
+          <p>
+            Our design showcase astonishing subjects identity preservation abilities without sacrificing text prompt adhearance, outperforms all previous competitors.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <h3 class="title is-4">Results on DreamEdit dataset</h3>
+          <div style="text-align: center;">
+            <img src="static/images/compare_edit_qualitative.jpg"
+                 class="body"
+                 alt="Interpolate start reference image."
+                 width="100%"/>
+          </div>
+          <p>
+            Our method is naturally a subject-driven editor when equipped with a foreground/background mask and image inversion, and it demonstrates outstanding performance on the DreamEditBench dataset.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    
+
+    <div class="columns is-centered">
+
+      <div class="column">
+        <div class="content">
+          <h3 class="title is-4">Results on FastComposer benchmark</h3>
+          <div style="text-align: center;">
+            <img src="static/images/fastcomposer.png"
+                 class="body"
+                 alt="Interpolate start reference image."
+                 width="100%"/>
+          </div>
+          <p>
+            Due to the high-quality feature extraction and decoupled generation technique, our method produces high-quality human face images with versatilities, <b><i>WITHOUT</i></b> training on domain-specific or large-scale datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Subjects Interpolation</h2>
+
+        <!-- Interpolating. -->
+        <div class="content has-text-justified">
+          <p>
+            Based on the nature of iterative generation, our methods automatically interpolate between when using image during subject-driven editing.
+          </p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="interpolation-video-column-1">
+            <div id="interpolation-image-wrapper-1" >
+              Loading 1...
+            </div>
+            <input class="slider-1 is-fullwidth is-hcentered is-large is-info"
+                   id="interpolation-slider-1"
+                   step="1" min="0" max="100" value="0" type="range">
+          </div>
+
+          <div class="interpolation-video-column-2">
+            <div id="interpolation-image-wrapper-2" >
+              Loading 2...
+            </div>
+            <input class="slider-2 is-hcentered is-large is-info"
+                   id="interpolation-slider-2"
+                   step="1" min="0" max="100" value="0" type="range">
+          </div>
+
+
+        </div>
+        <br/>
+
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+
+      <div class="column">
+        <div class="content">
+          <div style="text-align: center;"><h2 class="title is-3">More Visualization Results</h2></div>
+          <h3 class="title is-4">Subject-Driven Generation</h2>
+            <img src="static/images/more_results.jpg"
+            class="body"
+            alt="Interpolate start reference image." width="100%"/>
+
+          <h3 class="title is-4">Subject-Driven Editing</h2>
+            <img src="static/images/more_edit.jpg"
+            class="body"
+            alt="Interpolate start reference image." width="100%"/>
+         
+
+          <h3 class="title is-4">Human Content Generation</h2>
+            <img src="static/images/more_human.jpg"
+            class="body"
+            alt="Interpolate start reference image." width="100%"/>
+
+          <h3 class="title is-4">Subject Interpolation</h2>
+            <img src="static/images/interpolation.jpg"
+            class="body"
+            alt="Interpolate start reference image." width="100%"/>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</html>
